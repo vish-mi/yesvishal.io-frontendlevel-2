@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sportskeeda </title>
+
+	<link rel="stylesheet" type="text/css" href="style.css">	
+</head>
+<body>
+
+
+<div class="grid-container" >
+
+		
+</div>
+<div class="mybtn">
+	<button onclick="loadFeed()" id="loadbtn">Load More Feed</button>
+</div>
+	
+<script type="text/javascript">
+
+var Httpreq = new XMLHttpRequest(); // a new request
+var currentCount = 2;
+
+    Httpreq.open("GET",'https://s3-ap-southeast-1.amazonaws.com/takehomeproject/feed.json',false);
+    Httpreq.send(null); 
+    var ourData = JSON.parse(Httpreq.responseText)
+    console.log(ourData.data.rows[0]);
+    var add = ourData.data.rows[0].thumbnail;
+    console.log(add);
+    var pagesize = ourData.data.pageSize;
+
+    for ( var i =0 ; i<2 ; i++ ) {
+    	
+    	if (i%2 !== 0) {
+    	var iDiv = document.createElement('div');
+			 iDiv.id = 'r'+i;
+			iDiv.className = 'item1';
+			document.getElementsByClassName('grid-container')[0].appendChild(iDiv);
+		}
+
+		else {
+			var iDiv = document.createElement('div');
+			 iDiv.id = 'r'+i;
+			iDiv.className = 'item2';
+			document.getElementsByClassName('grid-container')[0].appendChild(iDiv);
+		}
+
+		var iiDiv = document.createElement('div');
+			 iiDiv.id = 'rc1'+i;
+			iiDiv.className = 'iitem1';
+			document.getElementById('r'+i).appendChild(iiDiv);
+
+			var iimg = document.createElement('img');
+			 iimg.id = 'img1'+i;
+			iimg.className = 'myimg';
+			document.getElementById('rc1'+i).appendChild(iimg);
+
+			var iiDiv = document.createElement('div');
+			 iiDiv.id = 'rc0'+i;
+			iiDiv.className = 'iitem1';
+			document.getElementById('r'+i).appendChild(iiDiv);
+
+			var title = document.createElement('p');
+			 title.id = 'tit'+i;
+			title.className = 'mytitle';
+			document.getElementById('rc0'+i).appendChild(title);
+
+			var category1 = document.createElement('p');
+			 category1.id = 'categ'+i;
+			category1.className = 'mycategory';
+			document.getElementById('rc0'+i).appendChild(category1);
+
+			var authr = document.createElement('p');
+			 authr.id = 'auth'+i;
+			authr.className = 'myauth';
+			document.getElementById('rc0'+i).appendChild(authr);
+
+ 
+		var iiDiv = document.createElement('div');
+			 iiDiv.id = 'rc2'+i;
+			iiDiv.className = 'iitem1';
+			document.getElementById('r'+i).appendChild(iiDiv);
+
+			var summary = document.createElement('p');
+			 summary.id = 'summary'+i;
+			summary.className = 'mysummary';
+			document.getElementById('rc2'+i).appendChild(summary);
+
+      document.getElementById("tit"+i).innerHTML = ourData.data.rows[i].title;
+
+     
+      document.getElementById("categ"+i).innerHTML = ourData.data.rows[i].category + ":" + " &nbsp;  " + ourData.data.rows[i].subcategory;
+
+      document.getElementById("auth"+i).innerHTML = ourData.data.rows[i].author_name + " &nbsp; &nbsp; &nbsp; &nbsp;  " + ourData.data.rows[i].post_date;
+
+     document.getElementById("img1"+i).src = ourData.data.rows[i].thumbnail;
+
+     document.getElementById("summary"+i).innerHTML = ourData.data.rows[i].summary;
+    } // closing for
+   
+    function loadFeed() {
+    	var k =0;
+    	if (currentCount < pagesize && k < 2)
+    	{
+    	for ( var i =currentCount ; i<currentCount+2 ; i++ ) {
+    	
+    	if (i%2 !== 0) {
+    	var iDiv = document.createElement('div');
+			 iDiv.id = 'r'+i;
+			iDiv.className = 'item1';
+			document.getElementsByClassName('grid-container')[0].appendChild(iDiv);
+		}
+
+		else {
+			var iDiv = document.createElement('div');
+			 iDiv.id = 'r'+i;
+			iDiv.className = 'item2';
+			document.getElementsByClassName('grid-container')[0].appendChild(iDiv);
+		}
+
+		var iiDiv = document.createElement('div');
+			 iiDiv.id = 'rc1'+i;
+			iiDiv.className = 'iitem1';
+			document.getElementById('r'+i).appendChild(iiDiv);
+
+			var iimg = document.createElement('img');
+			 iimg.id = 'img1'+i;
+			iimg.className = 'myimg';
+			document.getElementById('rc1'+i).appendChild(iimg);
+
+			var iiDiv = document.createElement('div');
+			 iiDiv.id = 'rc0'+i;
+			iiDiv.className = 'iitem1';
+			document.getElementById('r'+i).appendChild(iiDiv);
+
+			var title = document.createElement('p');
+			 title.id = 'tit'+i;
+			title.className = 'mytitle';
+			document.getElementById('rc0'+i).appendChild(title);
+
+			var category1 = document.createElement('p');
+			 category1.id = 'categ'+i;
+			category1.className = 'mycategory';
+			document.getElementById('rc0'+i).appendChild(category1);
+
+			var authr = document.createElement('p');
+			 authr.id = 'auth'+i;
+			authr.className = 'myauth';
+			document.getElementById('rc0'+i).appendChild(authr);
+
+ 
+		var iiDiv = document.createElement('div');
+			 iiDiv.id = 'rc2'+i;
+			iiDiv.className = 'iitem1';
+			document.getElementById('r'+i).appendChild(iiDiv);
+
+			var summary = document.createElement('p');
+			 summary.id = 'summary'+i;
+			summary.className = 'mysummary';
+			document.getElementById('rc2'+i).appendChild(summary);
+
+      document.getElementById("tit"+i).innerHTML = ourData.data.rows[i].title;
+
+     
+      document.getElementById("categ"+i).innerHTML = ourData.data.rows[i].category + ":" + " &nbsp;  " + ourData.data.rows[i].subcategory;
+
+      document.getElementById("auth"+i).innerHTML = ourData.data.rows[i].author_name + " &nbsp; &nbsp; &nbsp; &nbsp;  " + ourData.data.rows[i].post_date;
+
+     document.getElementById("img1"+i).src = ourData.data.rows[i].thumbnail;
+
+     document.getElementById("summary"+i).innerHTML = ourData.data.rows[i].summary;
+     k++;
+    } // closing for
+     currentCount += 2;
+    }
+
+    if (currentCount >= pagesize) {
+    	document.getElementById("loadbtn").innerHTML = "No more items";
+    }
+    }
+    
+</script>
+
+</body>
+</html>
